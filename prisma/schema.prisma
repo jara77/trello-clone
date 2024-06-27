@@ -3,14 +3,22 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  provider     = "postgresql"
+  url          = env("DATABASE_URL")
+  directUrl    = env("DIRECT_URL")
   relationMode = "prisma"
 }
 
 model Board {
-  id String @id @default(uuid())
+  id            String @id @default(uuid())
+  orgId         String
+  title         String
+  imageId       String
+  imageThumbUrl String
+  imageFullUrl  String @db.Text
+  imageUserName String @db.Text
+  imageLinkHTML String @db.Text
 
-  title String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
